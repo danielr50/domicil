@@ -1,25 +1,9 @@
-<ion-view title="home" ng-controller="control1">
-	
-      <!-- parte 1 -->
-      <ion-header-bar class="bar-dark">
-        <h1 class="title"></h1>
-        <button class="button" ng-click="refrescar()">
-          <i class="icon ion-refresh"></i>
-        </button>
-      </ion-header-bar>
+<ion-view view-title="tu domiciliario">
+  <ion-content class="padding">
+    <p>
+      <a class="button icon icon-right ion-chevron-right" href="#/tab/facts">Scientific Facts</a>
+    </p>
 
-    
-      <!-- parte 2 -->
-      <ion-content>
-        <div class="list">
-
-          <div class="item item-button-right" ng-repeat="s in servicios">
-            {{s.servicio}}
-            <button ng-click="s.funcion()" class="button button-{{s.colorb}}">
-              <a class="icon {{s.clase}}"></a>
-            </button>
-          </div>
-
-        </div>
-      </ion-content>
-  </ion-view>  
+    <p>{{todos[0].title}}</p>
+  </ion-content>
+</ion-view>

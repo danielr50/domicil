@@ -9,58 +9,74 @@ angular.module('starter', ['ionic'])
 
 //config
 .config(function($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.otherwise('/');
   
-
-  $stateProvider.state('app', {
-    abstract: true,
-    url:'/todos',
-    views: {
-      todos: {
-        templateUrl: 'templates/todos.html',
-        controller: 'TodosCtrl'
-        
+  //tab
+  $stateProvider
+    .state('tabs', {
+      url:'/tab',
+      abstract: true,
+      templateUrl: 'templates/tabs.html'
+    })
+        //tab/home *********  
+    .state('tabs.home', {
+      url:'/home',
+      views: {
+        'home-tab': {
+          templateUrl: 'templates/home.html',
+          controller: 'TodosCtrl'
+        }  
+      }  
+    })
+    //tab/facts
+    .state('tabs.facts', {
+      url:'/facts', 
+      views: {  
+        'home-tab': {
+          templateUrl: 'templates/facts.html'
+        }
+      }  
+    })
+    //tab/facts2
+    .state('tabs.facts2',{
+      url: '/facts2',
+      views: {
+        'home-tab': {
+          templateUrl: 'templates/facts2.html'
+        }
       }
-    }
-  })
-  $stateProvider.state('app.todos', {
-    url:'/todos',
-    views: {
-      todos2: {
-        templateUrl: 'templates/todos.html',
-        controller: 'TodosCtrl'
-        
+    })
+    //tab/about
+    .state('tabs.about', {
+      url: '/about',
+      views: {
+        'about-tab': {
+          templateUrl: 'templates/about.html'
+        }
       }
-    }
-  });
-  // inicio
-  $stateProvider.state('home', {
-    url:'/',
-    views:{
-      home:{
-        templateUrl: 'templates/home.html',
-        controller: 'control1'
+    })
+    //tab/navstack
+    .state('tabs.navstack', {
+      url: '/navstack',
+      views: {
+        'about-tab': {
+          templateUrl: 'templates/nav-stack.html'
+        }
       }
-    }
-    
-  });
-  $stateProvider.state('app.help',{
-    url: '/help',
-    views: {
-      help: {
-        templateUrl: 'templates/help.html',
-        controller: 'control1'
+    })
+    //tab/contact
+    .state('tabs.contact', {
+      url: '/contact',
+      views: {
+        'contact-tab': {
+          templateUrl: 'templates/contact.html'
+        }
       }
-    }
-  })
+    });
 
 
-
-
-
-
-
-
+  $urlRouterProvider.otherwise('/tab/home');
+  
+  
 })
 
 //controlladores
@@ -69,7 +85,7 @@ angular.module('starter', ['ionic'])
   $scope.servicios = [
     {servicio: "Hacer envío", clase:"ion-plus-circled", colorb:"positive",
       funcion: function(){ alert('esto es nuevo serv')}},
-    {servicio: 'Horarios ', clase:"ion-clock", colorb:"assertive", 
+    {servicio: 'Horario servicios ', clase:"ion-clock", colorb:"assertive", 
       funcion: function(){ alert('HORARIO')}},
     {servicio: "Dónde esta mi envío", clase:"ion-help-circled", colorb:"balanced",
       funcion: function(){ alert('donde esta mi envio')}}
@@ -108,14 +124,6 @@ angular.module('starter', ['ionic'])
   });
 
 //ionic tabs
-
-
-
-
-
-
-
-
 
 
 })
