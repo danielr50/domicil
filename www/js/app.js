@@ -22,8 +22,8 @@ angular.module('starter', ['ionic'])
       url:'/home',
       views: {
         'home-tab': {
-          templateUrl: 'templates/home.html',
-          controller: 'TodosCtrl'
+          templateUrl: 'templates/home.html'
+        
         }  
       }  
     })
@@ -41,7 +41,9 @@ angular.module('starter', ['ionic'])
       url: '/facts2',
       views: {
         'home-tab': {
-          templateUrl: 'templates/facts2.html'
+          templateUrl: 'templates/facts2.html',
+          controller: 'PostsCtrl'
+
         }
       }
     })
@@ -71,7 +73,7 @@ angular.module('starter', ['ionic'])
           templateUrl: 'templates/contact.html'
         }
       }
-    });
+    });//porlo que es el último
 
 
   $urlRouterProvider.otherwise('/tab/home');
@@ -100,13 +102,29 @@ angular.module('starter', ['ionic'])
   };
 
 }])
-.controller('TodosCtrl', function($scope){
-    $scope.todos = [
-      {title:"Take out trash", done:true},
-      {title:'Do laundrty', done:false},
-      {title:'Start cooking', done:false}
-    ]
-})
+
+.controller('contactoCtrl', ['$scope', function($scope){
+  $scope.contactos = [
+    {contacto: 'contacto@tudomiciliario.com', body:"Email: "},
+    {contacto: 3168335043, body:"Telefono: "}
+  ];
+}])
+
+.controller('PostsCtrl', ['$scope', function($scope){
+  // necesario para ng-model 
+  $scope.sumadre = {};
+  $scope.agregarServicio = function(){
+    if($scope.sumadre.handle){
+      //unshift agrega al inicio de un array posts
+      $scope.posts.unshift({
+        trabajo:'Pago Recibo',
+        locacion: $scope.sumadre.handle});
+      $scope.sumadre.handle = null;
+    }  
+  }
+  //modelo pasado a datos de envío
+  $scope.posts = [];
+}])
 
 
 
