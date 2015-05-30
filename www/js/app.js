@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngCordova'])
 
 
 
@@ -52,7 +52,8 @@ angular.module('starter', ['ionic'])
       url: '/about',
       views: {
         'about-tab': {
-          templateUrl: 'templates/about.html'
+          templateUrl: 'templates/about.html',
+          controller: 'AccountCtrl'
         }
       }
     })
@@ -61,7 +62,8 @@ angular.module('starter', ['ionic'])
       url: '/navstack',
       views: {
         'about-tab': {
-          templateUrl: 'templates/nav-stack.html'
+          templateUrl: 'templates/nav-stack.html',
+          controller: 'AccountCtrl'
         }
       }
     })
@@ -80,6 +82,108 @@ angular.module('starter', ['ionic'])
   
   
 })
+
+
+// .controller('MapController', ['$scope', function(){
+//   google.maps.event.addDomListener(window, "load", function(){
+//     var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+
+//     var mapOptions = {
+//       center: myLatlng,
+//       zoom: 16,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+
+//     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+//     $scope.map = map;
+//   });
+// }])
+.controller('AccountCtrl', function($scope, $ionicLoading) {
+console.log("AccountCtrl");
+$scope.initialise = function() {
+console.log("In Google.maps.event.addDomListener");
+var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+var mapOptions = {
+center: myLatlng,
+zoom: 16,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+        console.log(mapOptions);
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        console.log(pos);
+        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        var myLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+            map: map,
+            title: "My Location"
+        });
+    });
+
+    $scope.map = map;
+};
+google.maps.event.addDomListener(document.getElementById("map"), 'load', $scope.initialise());
+})
+
+
+
+
+
+
+// // .controller('GeoCtrl', function($cordovaGeolocation) {
+
+// //   var posOptions = {timeout: 10000, enableHighAccuracy: false};
+// //   $cordovaGeolocation
+// //     .getCurrentPosition(posOptions)
+// //     .then(function (position) {
+// //       var lat  = position.coords.latitude
+// //       var long = position.coords.longitude
+// //     }, function(err) {
+// //       // error
+// //       console.log("error del bueno", err);
+// //     });
+
+
+//   var watchOptions = {
+//     frequency : 1000,
+//     timeout : 3000,
+//     enableHighAccuracy: false // may cause errors if true
+//   };
+
+//   var watch = $cordovaGeolocation.watchPosition(watchOptions);
+//   watch.then(
+//     null,
+//     function(err) {
+//       // error
+//     },
+//     function(position) {
+//       var lat  = position.coords.latitude
+//       var long = position.coords.longitude
+//   });
+
+
+//   watch.clearWatch();
+//   // OR
+//   // $cordovaGeolocation.clearWatch(watch)
+//   //   .then(function(result) {
+//   //     // success
+      
+//   //     }, function (error) {
+//   //     // error
+//   //   });
+// })
+
+
+
+
+
+
+
+
+
+
+
 
 //controlladores
 .controller('control1', ['$scope', '$log', function($scope, $log){
@@ -103,6 +207,9 @@ angular.module('starter', ['ionic'])
 
 }])
 
+
+
+
 .controller('contactoCtrl', ['$scope', function($scope){
   $scope.contactos = [
     {contacto: 'contacto@tudomiciliario.com', body:"Email: "},
@@ -124,6 +231,25 @@ angular.module('starter', ['ionic'])
   }
   //modelo pasado a datos de envío
   $scope.posts = [];
+
+
+  // geolocalizacion google maps
+  // google.maps.event.addDomListener(window, "load", function(){
+  //   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+
+  //   var mapOptions = {
+  //     center: myLatlng,
+  //     zoom: 16,
+  //     mapTypeId: google.maps.MapTypeId.ROADMAP
+  //   };
+
+  //   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  //   $scope.map = map;
+
+
+  // });
+  // geolocalizacion google maps
+
 }])
 
 

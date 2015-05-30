@@ -6,6 +6,7 @@
       <label class="item item-input">
         <input ng-model='sumadre.handle' type="text" placeholder="Dirección envío"> 
       </label>
+      <!-- lo muestro en real time -->
       <label class="item iten-input">
         <p>Dirección: {{sumadre.handle}} </p>
         <button class="button button-dark" ng-click="agregarServicio()">agregar</button>
@@ -22,5 +23,12 @@
 
       <a class="button icon ion-home" href="#/tab/home"> Home</a>
       <a class="button icon ion-chevron-left" href="#/tab/facts"> Volver atras</a>
+
+
+      <!-- geolocalización -->
+      <div id="map" data-tap-disabled="true"></div>  
+
+      <!-- fin geolocalización -->
+
   </ion-content>
 </ion-view>
